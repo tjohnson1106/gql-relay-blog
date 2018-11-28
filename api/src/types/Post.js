@@ -1,28 +1,30 @@
-const mongoose = require("mongoose");
+const {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLID
+} = require("graphql");
 
-mongoose.connect(
-  "mongodb://thomas:thomas01@ds215822.mlab.com:15822/gql-api",
-  {
-    useMongoClient: true
+const Post = new GraphQLObjectType({
+  name: "Post",
+  description: "Post type definition",
+  fields: {
+    id: {
+      type: new GraphQLNonNull(GraphQLID),
+      description: "ID of the post",
+      resolve: post => post.id
+    },
+    title: {
+      type: GraphQLString,
+      description: "Title of the post",
+      resolve: post => post.title
+    },
+    content: {
+      type: GraphQLString,
+      description: "Content of the post",
+      resolve: post => post.content
+    }
   }
-);
-
-const Schema = mongoose.Schema;
-const postSchema = new Schema({
-  title: String,
-  content: String
 });
 
-var PostModel = mongoose.model("Post", postSchema);
-
-module.exports = {
-  getPosts: () => {
-    return PostModel.find();
-  },
-  getPost: () => {
-    return PostModel.findOne({ _id: id });
-  },
-  createPost: post => {
-    return PostModel(post).save();
-  }
-};
+module.exports = Post;
