@@ -1,7 +1,12 @@
-const { GraphQLObjectType, GraphQLNonNull, GraphQLList } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLList,
+  GraphQLID
+} = require("graphql");
 
 const Post = require("./Post");
-const PostModel = require("..models/Post");
+const PostModel = require("../models/PostModel");
 
 const Query = new GraphQLObjectType({
   name: "Query",
@@ -13,10 +18,10 @@ const Query = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID)
-        },
-        resolve: (_, args) => {
-          return PostModel.getPost(args.id);
         }
+      },
+      resolve: (_, args) => {
+        return PostModel.getPost(args.id);
       }
     },
     posts: {

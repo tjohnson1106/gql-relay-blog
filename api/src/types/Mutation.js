@@ -6,7 +6,7 @@ const {
 } = require("graphql");
 
 const Post = require("./Post");
-const PostModel = require("..models/Post");
+const PostModel = require("../models/PostModel");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -20,7 +20,7 @@ const Mutation = new GraphQLObjectType({
           description: "Title of post"
         },
         content: {
-          typeGraphQLString,
+          type: GraphQLString,
           description: "Content of post"
         }
       },
@@ -34,4 +34,4 @@ const Mutation = new GraphQLObjectType({
   }
 });
 
-module.exports = Query;
+module.exports = Mutation;

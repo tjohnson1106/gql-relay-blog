@@ -1,6 +1,7 @@
 const express = require("express");
 const graphQLHTTP = require("express-graphql");
 const { GraphQLSchema } = require("graphql");
+const mongoose = require("mongoose");
 
 const Post = require("./src/types/Post");
 const Query = require("./src/types/Query");
@@ -20,3 +21,7 @@ app.use(
     graphiql: true
   })
 );
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`server running on ${port}`));
