@@ -22,3 +22,5 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     return null;
   }
 );
+
+module.exports = { nodeInterface, nodeDefinitions };
