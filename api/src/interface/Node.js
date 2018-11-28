@@ -23,4 +23,4 @@ const { nodeInterface, nodeField } = nodeDefinitions(
   }
 );
 
-module.exports = { nodeInterface, nodeDefinitions };
+module.exports = { nodeInterface, nodeField };

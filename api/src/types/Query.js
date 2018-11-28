@@ -1,38 +1,35 @@
 const {
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID
+  GraphQLObjectType
+  // GraphQLNonNull,
+  // GraphQLList,
+  // GraphQLID
 } = require("graphql");
+const {
+  connectionArgs,
+  connectionFromPromisedArray
+} = require("graphql-relay");
 
-const Post = require("./Post");
+const { nodeField } = require("../interface/Node");
+const { Post, PostConnection } = require("./Post");
 const PostModel = require("../models/PostModel");
 
 const Query = new GraphQLObjectType({
   name: "Query",
   description: "Query interface",
   fields: {
-    post: {
-      type: Post,
-      description: "Query to obtain single post",
-      args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLID)
-        }
-      },
-      resolve: (_, args) => {
-        return PostModel.getPost(args.id);
-      }
-    },
+    node: nodeField,
     posts: {
-      type: new GraphQLList(Post),
-      description: "Query to get all posts",
-      args: {},
-      resolve: (_, args) => {
-        return PostModel.getPosts();
-      }
+      type: PostConnection,
+      args: connectionArgs,
+      resolve: (_, args) =>
+        connectionFromPromisedArray(PostModel.getPosts(), args)
     }
   }
 });
 
 module.exports = Query;
+
+///////////////////////////////////////////////////////////////
+// 112820181347: Change export to object do to Query.node/////
+// ^ must be  an object warning /////////////////////////////
+////////////////////////////////////////////////////////////
