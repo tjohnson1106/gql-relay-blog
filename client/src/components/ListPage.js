@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import Post from "./Post";
 import { mockPostData } from "../data/mockPostData";
@@ -8,7 +9,9 @@ class ListPage extends Component {
   render() {
     return (
       <div style={StyleSheet.listPageWrapper}>
-        <div style={styles.postButtonWrapper}>+ New Post</div>
+        <Link style={styles.postButtonWrapper} to="/create-post">
+          + New Post
+        </Link>
         <div style={styles.mockPost}>
           {mockPostData.map(({ node }) => (
             <Post key={node._id} post={node} />
