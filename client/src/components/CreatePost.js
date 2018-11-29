@@ -34,6 +34,7 @@ class CreatePost extends Component {
           }
         />
         {/* render when title and content are filled */}
+
         {this.state.title && this.state.content && (
           <button style={styles.postButtonWrapper}>Post</button>
         )}

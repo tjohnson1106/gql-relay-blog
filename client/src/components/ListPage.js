@@ -8,7 +8,7 @@ class ListPage extends Component {
   state = {};
   render() {
     return (
-      <div style={StyleSheet.listPageWrapper}>
+      <div style={styles.listPageWrapper}>
         <Link style={styles.postButtonWrapper} to="/create-post">
           + New Post
         </Link>
