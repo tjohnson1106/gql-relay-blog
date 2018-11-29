@@ -1,6 +1,6 @@
 const {
-  GraphQLObjectType
-  // GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLNonNull
   // GraphQLList,
   // GraphQLID
 } = require("graphql");
@@ -18,11 +18,14 @@ const Query = new GraphQLObjectType({
   description: "Query interface",
   fields: {
     node: nodeField,
-    posts: {
-      type: PostConnection,
-      args: connectionArgs,
-      resolve: (_, args) =>
-        connectionFromPromisedArray(PostModel.getPosts(), args)
+    // replacing 'posts with viewer object'
+    viewer: {
+      name: "Viewer",
+      description: "Viewer pattern implementation",
+      type: new GraphQLNonNull(Viewer),
+      resolve: (_, args) => {
+        return {};
+      }
     }
   }
 });

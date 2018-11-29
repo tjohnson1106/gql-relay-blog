@@ -1,7 +1,6 @@
 const express = require("express");
 const graphQLHTTP = require("express-graphql");
 const { GraphQLSchema } = require("graphql");
-const mongoose = require("mongoose");
 
 const Post = require("./src/types/Post");
 const Query = require("./src/types/Query");
@@ -13,6 +12,9 @@ const schema = new GraphQLSchema({
 });
 
 let app = express();
+
+const cors = require("cors");
+app.use(cors());
 
 app.use(
   "/api",
