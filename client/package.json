@@ -5,10 +5,10 @@
   "dependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",
-    "babel-core": "7.0.0-bridge.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
-    "babel-loader": "8.0.4",
+    "babel-loader": "^8.0.4",
     "babel-plugin-named-asset-import": "^0.2.3",
     "babel-preset-react-app": "^6.1.0",
     "bfj": "6.1.1",
@@ -46,6 +46,7 @@
     "react-modal": "^3.6.1",
     "react-relay": "^1.7.0",
     "react-router-dom": "^4.3.1",
+    "relay-runtime": "^1.7.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -59,7 +60,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "relay:compile": "node_modules/.bin/relay-compiler --src ./src/ --schema ./schema.graphql"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -71,7 +73,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-plugin-relay": "^1.7.0"
+    "babel-plugin-relay": "^1.7.0",
+    "babel-preset-env": "^1.7.0",
+    "graphql": "^14.0.2",
+    "relay-compiler": "^1.7.0"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -117,6 +122,14 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "relay"
     ]
+  },
+  "metadata": {
+    "graphql": {
+      "schema": ".schema.graphql"
+    }
   }
 }

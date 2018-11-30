@@ -1,9 +1,4 @@
-const {
-  GraphQLObjectType
-  // GraphQLNonNull,
-  // GraphQLList,
-  // GraphQLID
-} = require("graphql");
+const { GraphQLObjectType, GraphQLNonNull, GraphQLID } = require("graphql");
 const {
   connectionArgs,
   connectionFromPromisedArray
@@ -13,16 +8,36 @@ const { nodeField } = require("../interface/Node");
 const { Post, PostConnection } = require("./Post");
 const PostModel = require("../models/PostModel");
 
+const Viewer = new GraphQLObjectType({
+  name: "Viewer",
+  fields: {
+    allPosts: {
+      type: new GraphQLNonNull(PostConnection),
+      args: connectionArgs,
+      resolve: (_, args) =>
+        connectionFromPromisedArray(PostModel.getPosts(), args)
+    },
+    id: {
+      type: new GraphQLNonNull(GraphQLID),
+      args: {},
+      resolve: (_, args) => "viewer-fixed"
+    }
+  }
+});
+
 const Query = new GraphQLObjectType({
   name: "Query",
   description: "Query interface",
   fields: {
     node: nodeField,
-    posts: {
-      type: PostConnection,
-      args: connectionArgs,
-      resolve: (_, args) =>
-        connectionFromPromisedArray(PostModel.getPosts(), args)
+    // replacing 'posts with viewer object'
+    viewer: {
+      name: "Viewer",
+      description: "Viewer pattern implementation",
+      type: new GraphQLNonNull(Viewer),
+      resolve: (_, args) => {
+        return {};
+      }
     }
   }
 });

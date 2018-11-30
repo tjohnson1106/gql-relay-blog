@@ -2,6 +2,7 @@
 /dist
 /tmp
 /out-tsc
+/src/__generated__/
 
 # Runtime data
 pids

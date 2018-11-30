@@ -17,7 +17,7 @@ var PostModel = mongoose.model("Post", postSchema);
 
 module.exports = {
   getPosts: () => {
-    return PostModel.find();
+    return PostModel.find().sort({ _id: -1 });
   },
   getPost: () => {
     return PostModel.findOne({ _id: id });
