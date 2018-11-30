@@ -6,7 +6,7 @@ let tempID = 0;
 
 const mutation = graphql`
   mutation CreatePostMutation($input: CreatePostInput!) {
-    CreatePost(input: $input) {
+    createPost(input: $input) {
       post {
         id
         title

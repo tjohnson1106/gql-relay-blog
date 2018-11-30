@@ -4,7 +4,7 @@ import { environment } from "./relay/Environment";
 
 import ListPage from "./components/ListPage";
 
-const appAllPostQuery = graphql`
+const AppAllPostQuery = graphql`
   query AppAllPostQuery {
     viewer {
       ...ListPage_viewer
@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <QueryRenderer
         environment={environment}
-        query={appAllPostQuery}
+        query={AppAllPostQuery}
         render={({ error, props }) => {
           if (error) {
             return <div>{error.message}</div>;
