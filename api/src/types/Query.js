@@ -8,7 +8,7 @@ const { nodeField } = require("../interface/Node");
 const { Post, PostConnection } = require("./Post");
 const PostModel = require("../models/PostModel");
 
-const View = new GraphQLObjectType({
+const Viewer = new GraphQLObjectType({
   name: "Viewer",
   fields: {
     allPosts: {
@@ -18,7 +18,7 @@ const View = new GraphQLObjectType({
         connectionFromPromisedArray(PostModel.getPosts(), args)
     },
     id: {
-      type: new GraphQLID(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
       args: {},
       resolve: (_, args) => "viewer-fixed"
     }
