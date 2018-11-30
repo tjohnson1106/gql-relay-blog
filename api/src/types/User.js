@@ -32,3 +32,5 @@ const User = new GraphQLObjectType({
     }
   }
 });
+
+module.exports = { User };

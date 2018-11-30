@@ -14,22 +14,22 @@ const userSchema = new Schema({
   fullname: String
 });
 
-var UserModal = mongoose.model("User", userSchema);
+var UserModel = mongoose.model("User", userSchema);
 
 module.exports = {
   getUser: (id, username) => {
-    return UserModal.findOne({
+    return UserModel.findOne({
       $or: [{ _id, id }, { username: username }]
     });
   },
   loginUser: loginUserInput => {
     const { username, password } = loginUserInput;
-    return UserModal.findOne({
+    return UserModel.findOne({
       $and: [{ username: username }, { password, password }]
     });
   },
 
   createUser: user => {
-    return UserModal(user).save();
+    return UserModel(user).save();
   }
 };
