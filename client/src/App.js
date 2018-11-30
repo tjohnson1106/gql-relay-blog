@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { QueryRenderer, graphql } from "react-relay";
-import environment from "./relay/Environment";
+import { environment } from "./relay/Environment";
 
 import ListPage from "./components/ListPage";
 
