@@ -7,6 +7,8 @@ import "./index.css";
 import App from "./App";
 import CreatePost from "./components/CreatePost";
 
+// TODO: 120120181249 connect client to api authentication
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
