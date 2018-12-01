@@ -19,7 +19,7 @@ var UserModel = mongoose.model("User", userSchema);
 module.exports = {
   getUser: (id, username) => {
     return UserModel.findOne({
-      $or: [{ _id, id }, { username: username }]
+      $or: [{ _id: id }, { username: username }]
     });
   },
   loginUser: loginUserInput => {
