@@ -19,14 +19,6 @@ const Post = new GraphQLObjectType({
   interfaces: [nodeInterface],
   fields: {
     id: globalIdField(),
-
-    // {
-    //   *Removed upon Relay implementation
-    //   type: new GraphQLNonNull(GraphQLID),
-    //   description: "ID of the post",
-    //   resolve: post => post.id
-    // },
-
     title: {
       type: GraphQLString,
       description: "Title of the post",
@@ -36,6 +28,11 @@ const Post = new GraphQLObjectType({
       type: GraphQLString,
       description: "Content of the post",
       resolve: post => post.content
+    },
+    author: {
+      type: User,
+      description: "Author of the post",
+      resolve: post => PostModel.getPostAuthor(post.id)
     }
   }
 });
