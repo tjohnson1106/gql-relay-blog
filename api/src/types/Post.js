@@ -4,9 +4,14 @@ const {
   GraphQLString,
   GraphQLID
 } = require("graphql");
-
 const { globalIdField, connectionDefinitions } = require("graphql-relay");
+
 const { nodeInterface } = require("../interface/Node");
+
+const { User } = require("./User");
+const PostModel = require("../models/PostModel");
+
+// TODO: Implement author 113020181757
 
 const Post = new GraphQLObjectType({
   name: "Post",
@@ -14,14 +19,6 @@ const Post = new GraphQLObjectType({
   interfaces: [nodeInterface],
   fields: {
     id: globalIdField(),
-
-    // {
-    //   *Removed upon Relay implementation
-    //   type: new GraphQLNonNull(GraphQLID),
-    //   description: "ID of the post",
-    //   resolve: post => post.id
-    // },
-
     title: {
       type: GraphQLString,
       description: "Title of the post",
@@ -31,6 +28,11 @@ const Post = new GraphQLObjectType({
       type: GraphQLString,
       description: "Content of the post",
       resolve: post => post.content
+    },
+    author: {
+      type: User,
+      description: "Author of the post",
+      resolve: post => PostModel.getPostAuthor(post.id)
     }
   }
 });

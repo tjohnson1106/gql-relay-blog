@@ -1,10 +1,20 @@
-const { GraphQLObjectType, GraphQLNonNull, GraphQLID } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLString
+} = require("graphql");
 const {
   connectionArgs,
-  connectionFromPromisedArray
+  connectionFromPromisedArray,
+  fromGlobalId
 } = require("graphql-relay");
 
+const { User } = require("./User");
+const UserModel = require("../models/UserModel");
+
 const { nodeField } = require("../interface/Node");
+
 const { Post, PostConnection } = require("./Post");
 const PostModel = require("../models/PostModel");
 
@@ -16,6 +26,29 @@ const Viewer = new GraphQLObjectType({
       args: connectionArgs,
       resolve: (_, args) =>
         connectionFromPromisedArray(PostModel.getPosts(), args)
+    },
+    User: {
+      type: User,
+      args: {
+        id: {
+          type: GraphQLID
+        },
+        username: {
+          type: GraphQLString
+        }
+      },
+
+      // resolve: use this to get the GQL
+      // ^Global ID to get the username and id
+
+      resolve: (_, args) => {
+        const { type, id } = fromGlobalId(args.id);
+        if (type === "User") {
+          return UserModel.getUser(id, args.username);
+        } else {
+          return null;
+        }
+      }
     },
     id: {
       type: new GraphQLNonNull(GraphQLID),

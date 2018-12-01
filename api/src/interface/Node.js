@@ -2,12 +2,15 @@ const { GraphQLInterfaceType, GraphQLNonNull, GraphQLID } = require("graphql");
 const { nodeDefinitions, fromGlobalId } = require("graphql-relay");
 
 const PostModel = require("../models/PostModel");
+const UserModel = require("../models/UserModel");
 
 const { nodeInterface, nodeField } = nodeDefinitions(
   globalId => {
     const { type, id } = fromGlobalId(globalId);
     if (type === "Post") {
       return PostModel.getPost(id);
+    } else if (type === "User") {
+      return UserModel.getUser(id);
     } else {
       return null;
     }
@@ -15,8 +18,14 @@ const { nodeInterface, nodeField } = nodeDefinitions(
 
   object => {
     const { Post } = require("../types/Post");
+    const { User } = require("../types/User");
+
     if (object.title) {
       return Post;
+    }
+
+    if (object.username) {
+      return User;
     }
 
     return null;
