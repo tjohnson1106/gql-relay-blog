@@ -3,7 +3,7 @@ import { environment } from "../relay/Environment";
 
 const mutation = graphql`
   mutation CreateUserMutation($createUserInput: CreateUserInput!) {
-    CreateUser(input: $createUserInput) {
+    createUser(input: $createUserInput) {
       user {
         id
       }

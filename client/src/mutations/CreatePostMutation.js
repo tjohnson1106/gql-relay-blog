@@ -23,8 +23,8 @@ export default (title, content, userId, viewerId, callback) => {
   const variables = {
     input: {
       title,
-      userId,
       content,
+      userId,
       clientMutationId: ""
     }
   };

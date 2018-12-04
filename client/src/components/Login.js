@@ -57,7 +57,7 @@ class Login extends Component {
         </div>
         <div>
           <button style={styles.inputButton} onClick={() => this._confirm()}>
-            {this.state.login ? "Login In" : "Sign Up"}
+            {this.state.login ? "Log In" : "Sign Up"}
           </button>
 
           <button
@@ -78,11 +78,11 @@ class Login extends Component {
   }
 
   _confirm = () => {
-    const { username, fullname, password } = this.state;
+    const { username, password, fullname } = this.state;
     if (this.state.login) {
       LoginUserMutation(username, password, user => {
         localStorage.setItem("User", JSON.stringify(user));
-        this.props.history.push("/");
+        this.props.history.push(" /");
       });
     } else {
       CreateUserMutation(username, password, fullname, user => {

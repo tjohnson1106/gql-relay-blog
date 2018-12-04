@@ -2087,20 +2087,6 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-relay-plugin-loader@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/babel-relay-plugin-loader/-/babel-relay-plugin-loader-0.11.0.tgz#adf536b8dc75c001d20ce9fcdd5d6a3f17a98e4e"
-  integrity sha1-rfU2uNx1wAHSDOn83V1qPxepjk4=
-  dependencies:
-    babel-relay-plugin "^0.11.0"
-
-babel-relay-plugin@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/babel-relay-plugin/-/babel-relay-plugin-0.11.0.tgz#3ca99a395e40ac10050ca25c1200ea4706b2d8a5"
-  integrity sha1-PKmaOV5ArBAFDKJcEgDqRway2KU=
-  dependencies:
-    graphql "0.9.1"
-
 babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
@@ -4669,13 +4655,6 @@ graphql-compiler@1.7.0:
     fb-watchman "^2.0.0"
     immutable "~3.7.6"
 
-graphql@0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.1.tgz#f4d154cbec054d4a5d3b1be95f23435c09aa86c8"
-  integrity sha1-9NFUy+wFTUpdOxvpXyNDXAmqhsg=
-  dependencies:
-    iterall "1.0.3"
-
 graphql@^14.0.2:
   version "14.0.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.0.2.tgz#7dded337a4c3fd2d075692323384034b357f5650"
@@ -5682,11 +5661,6 @@ istanbul-reports@^1.5.1:
   integrity sha512-+cfoZ0UXzWjhAdzosCPP3AN8vvef8XDkWtTfgaN+7L3YTpNYITnCaEkceo5SEYy644VkHka/P1FvkWvrG/rrJw==
   dependencies:
     handlebars "^4.0.3"
-
-iterall@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.0.3.tgz#e0b31958f835013c323ff0b10943829ac69aa4b7"
-  integrity sha1-4LMZWPg1ATwyP/CxCUOCmsaapLc=
 
 iterall@^1.2.2:
   version "1.2.2"

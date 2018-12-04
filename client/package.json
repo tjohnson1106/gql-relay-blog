@@ -61,7 +61,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "relay:compile": "node_modules/.bin/relay-compiler --src ./src/ --schema ./schema.graphql"
+    "relay:compile": "node_modules/.bin/relay-compiler --src ./src/ --schema ./schema.graphql",
+    "get:gql": "get-graphql-schema http://localhost:5000/api > schema.graphql"
   },
   "eslintConfig": {
     "extends": "react-app"

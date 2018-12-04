@@ -21,15 +21,16 @@ class Post extends Component {
       >
         <h3>{this.props.post.title}</h3>
         <Modal isOpen={this.state.isOpen}>
+          By: <div>{this.props.post.author.fullname}</div>
           <h3>{this.props.post.title}</h3>
           <div>{this.props.post.content}</div>
           <button
-            style={styles.closeButton}
             onClick={() =>
               this.setState({
                 isOpen: false
               })
             }
+            style={styles.closeButton}
           >
             x
           </button>
@@ -68,6 +69,9 @@ export default createFragmentContainer(
       id
       title
       content
+      author {
+        fullname
+      }
     }
   `
 );

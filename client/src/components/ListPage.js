@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { createFragmentContainer, graphql } from "react-relay";
 
 import Post from "./Post";
-// import { mockPostData } from "../data/mockPostData";
+// import { listPostData } from "../data/listPostData";
 
 class ListPage extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class ListPage extends Component {
           </Link>
         )}
         {this.state.user && (
-          <a
+          <button
             onClick={() => {
               localStorage.removeItem("User");
               window.location.reload();
@@ -42,9 +42,9 @@ class ListPage extends Component {
             style={styles.postButtonWrapper}
           >
             Logout
-          </a>
+          </button>
         )}
-        <div style={styles.mockPost}>
+        <div style={styles.listPost}>
           {this.props.viewer.allPosts.edges.map(({ node }) => (
             <Post key={node._id} post={node} />
           ))}
@@ -71,7 +71,7 @@ const styles = {
     textDecoration: "underline",
     cursor: "pointer"
   },
-  mockPost: {
+  listPost: {
     marginTop: 20
   }
 };
