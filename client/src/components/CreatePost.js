@@ -18,10 +18,24 @@ class CreatePost extends Component {
     super(props);
     this.state = {
       title: "",
-      content: ""
+      content: "",
+      user: null
     };
     this._handlePost = this._handlePost.bind(this);
   }
+
+  // get user other wise revert to home
+  componentDidMount() {
+    const user = localStorage.getItem("User");
+    if (user) {
+      this.setState({
+        user: JSON.parse(user)
+      });
+    } else {
+      window.location.href = "/";
+    }
+  }
+
   render() {
     // must return environment and corresponding query to QueryRenderer HOC
     return (
@@ -74,7 +88,7 @@ class CreatePost extends Component {
 
   _handlePost = viewerId => {
     const { title, content } = this.state;
-    CreatePostMutation(title, content, viewerId, () => {
+    CreatePostMutation(title, content, this.state.user.id, viewerId, () => {
       this.props.history.push("/");
     });
   };
