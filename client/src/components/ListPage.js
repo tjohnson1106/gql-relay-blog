@@ -13,6 +13,8 @@ class ListPage extends Component {
     this.state = {
       user: null
     };
+
+    this._loadMore = this._loadMore.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +60,18 @@ class ListPage extends Component {
         </button>
       </div>
     );
+  }
+
+  _loadMore() {
+    if (!this.props.relay.hasMore()) {
+      console.log(`Nothing more to load`);
+      return;
+    } else if (this.props.relay.isLoading()) {
+      console.log(`Request is already pending`);
+      return;
+    }
+
+    this.props.relay.loadMore(1);
   }
 }
 
