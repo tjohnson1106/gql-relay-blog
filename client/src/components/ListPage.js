@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { createFragmentContainer, graphql } from "react-relay";
+import { createPaginationContainer, graphql } from "react-relay";
 
 import Post from "./Post";
 // import { mockPostData } from "../data/mockPostData";
@@ -52,6 +52,10 @@ class ListPage extends Component {
             <Post key={node._id} post={node} />
           ))}
         </div>
+
+        <button style={styles.buttonWrapper} onClick={() => this._loadMore}>
+          Load More
+        </button>
       </div>
     );
   }
@@ -79,18 +83,50 @@ const styles = {
   }
 };
 
-export default createFragmentContainer(
+export default createPaginationContainer(
   ListPage,
   graphql`
     fragment ListPage_viewer on Viewer {
-      allPosts(last: 100, order: "DESC")
+      allPosts(first: $count, after: $after, order: "DESC")
         @connection(key: "ListPage_allPosts", filters: []) {
         edges {
           node {
             ...Post_post
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
-  `
+  `,
+  // define pagination configuration here
+  {
+    direction: "forward",
+    query: graphql`
+      query ListPageForwardQuery($count: Int!, $after: String) {
+        viewer {
+          ...ListPage_viewer
+        }
+      }
+    `,
+
+    getConnectionFromProps(props) {
+      return props.viewer && props.viewer.allPosts;
+    },
+    getFragmentVariables(previousVariables, totalCount) {
+      return {
+        ...previousVariables,
+        count: totalCount
+      };
+    },
+
+    getVariables(props, paginationInfo, fragmentVariables) {
+      return {
+        count: paginationInfo.count,
+        after: paginationInfo.cursor
+      };
+    }
+  }
 );
