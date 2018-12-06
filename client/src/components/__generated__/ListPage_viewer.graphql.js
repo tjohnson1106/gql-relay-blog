@@ -17,7 +17,11 @@ export type ListPage_viewer = {|
       +node: ?{|
         +$fragmentRefs: Post_post$ref
       |}
-    |}>
+    |}>,
+    +pageInfo: {|
+      +hasNextPage: boolean,
+      +endCursor: ?string,
+    |},
   |},
   +$refType: ListPage_viewer$ref,
 |};
@@ -31,16 +35,27 @@ const node/*: ConcreteFragment*/ = {
   "metadata": {
     "connection": [
       {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
+        "count": "count",
+        "cursor": "after",
+        "direction": "forward",
         "path": [
           "allPosts"
         ]
       }
     ]
   },
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "RootArgument",
+      "name": "count",
+      "type": "Int"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "after",
+      "type": "String"
+    }
+  ],
   "selections": [
     {
       "kind": "LinkedField",
@@ -104,14 +119,14 @@ const node/*: ConcreteFragment*/ = {
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "hasPreviousPage",
+              "name": "hasNextPage",
               "args": null,
               "storageKey": null
             },
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "startCursor",
+              "name": "endCursor",
               "args": null,
               "storageKey": null
             }
@@ -122,5 +137,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f1ede5f70e99b77cd898d2e1cb8e374e';
+(node/*: any*/).hash = '57141b383f91e3d35b1c8c3a7059dd83';
 module.exports = node;

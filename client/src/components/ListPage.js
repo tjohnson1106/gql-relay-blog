@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { createFragmentContainer, graphql } from "react-relay";
+import { createPaginationContainer, graphql } from "react-relay";
 
 import Post from "./Post";
 // import { mockPostData } from "../data/mockPostData";
@@ -13,6 +13,8 @@ class ListPage extends Component {
     this.state = {
       user: null
     };
+
+    this._loadMore = this._loadMore.bind(this);
   }
 
   componentDidMount() {
@@ -52,8 +54,24 @@ class ListPage extends Component {
             <Post key={node._id} post={node} />
           ))}
         </div>
+
+        <button style={styles.buttonWrapper} onClick={() => this._loadMore()}>
+          Load More
+        </button>
       </div>
     );
+  }
+
+  _loadMore() {
+    if (!this.props.relay.hasMore()) {
+      console.log(`Nothing more to load`);
+      return;
+    } else if (this.props.relay.isLoading()) {
+      console.log(`Request is already pending`);
+      return;
+    }
+
+    this.props.relay.loadMore(1);
   }
 }
 
@@ -79,17 +97,50 @@ const styles = {
   }
 };
 
-export default createFragmentContainer(
+export default createPaginationContainer(
   ListPage,
   graphql`
     fragment ListPage_viewer on Viewer {
-      allPosts(last: 100) @connection(key: "ListPage_allPosts", filters: []) {
+      allPosts(first: $count, after: $after, order: "DESC")
+        @connection(key: "ListPage_allPosts", filters: []) {
         edges {
           node {
             ...Post_post
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
-  `
+  `,
+  // define pagination configuration here
+  {
+    direction: "forward",
+    query: graphql`
+      query ListPageForwardQuery($count: Int!, $after: String) {
+        viewer {
+          ...ListPage_viewer
+        }
+      }
+    `,
+
+    getConnectionFromProps(props) {
+      return props.viewer && props.viewer.allPosts;
+    },
+    getFragmentVariables(previousVariables, totalCount) {
+      return {
+        ...previousVariables,
+        count: totalCount
+      };
+    },
+
+    getVariables(props, paginationInfo, fragmentVariables) {
+      return {
+        count: paginationInfo.count,
+        after: paginationInfo.cursor
+      };
+    }
+  }
 );

@@ -20,8 +20,10 @@ const { fromGlobalId } = require("graphql-relay");
 var PostModel = mongoose.model("Post", postSchema);
 
 module.exports = {
-  getPosts: () => {
-    return PostModel.find().sort({ _id: -1 });
+  // pass order parameter to getPosts
+  getPosts: order => {
+    // if order is descending paginate other wise current
+    return PostModel.find().sort({ _id: order == "DESC" ? -1 : 1 });
   },
   getPost: () => {
     return PostModel.findOne({ _id: id });
