@@ -55,7 +55,7 @@ class ListPage extends Component {
           ))}
         </div>
 
-        <button style={styles.buttonWrapper} onClick={() => this._loadMore}>
+        <button style={styles.buttonWrapper} onClick={() => this._loadMore()}>
           Load More
         </button>
       </div>

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ed0549c51f14a16283d14e973e669af7
+ * @relayHash 7b06ecf0504b70e9708ac7d9aa6724ff
  */
 
 /* eslint-disable */
@@ -10,24 +10,24 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type ListPage_viewer$ref = any;
-export type AppAllPostQueryVariables = {|
+export type ListPageForwardQueryVariables = {|
   count: number,
   after?: ?string,
 |};
-export type AppAllPostQueryResponse = {|
+export type ListPageForwardQueryResponse = {|
   +viewer: {|
     +$fragmentRefs: ListPage_viewer$ref
   |}
 |};
-export type AppAllPostQuery = {|
-  variables: AppAllPostQueryVariables,
-  response: AppAllPostQueryResponse,
+export type ListPageForwardQuery = {|
+  variables: ListPageForwardQueryVariables,
+  response: ListPageForwardQueryResponse,
 |};
 */
 
 
 /*
-query AppAllPostQuery(
+query ListPageForwardQuery(
   $count: Int!
   $after: String
 ) {
@@ -110,13 +110,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "AppAllPostQuery",
+  "name": "ListPageForwardQuery",
   "id": null,
-  "text": "query AppAllPostQuery(\n  $count: Int!\n  $after: String\n) {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(first: $count, after: $after, order: \"DESC\") {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n  author {\n    fullname\n    id\n  }\n}\n",
+  "text": "query ListPageForwardQuery(\n  $count: Int!\n  $after: String\n) {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(first: $count, after: $after, order: \"DESC\") {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n  author {\n    fullname\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "AppAllPostQuery",
+    "name": "ListPageForwardQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -141,7 +141,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AppAllPostQuery",
+    "name": "ListPageForwardQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -276,5 +276,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '245eafaf6ebd6ab5843c383a60b4ed5c';
+(node/*: any*/).hash = '1bb23891ed6322448c471801e53f44fb';
 module.exports = node;
