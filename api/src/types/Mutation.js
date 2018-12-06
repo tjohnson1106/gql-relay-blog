@@ -46,8 +46,8 @@ const CreateUserMutation = mutationWithClientMutationId({
     fullname: { type: new GraphQLNonNull(GraphQLString) }
   },
   outputFields: {
-    user: {
-      type: User
+    message: {
+      type: GraphQLString
     }
   },
 
@@ -58,7 +58,7 @@ const CreateUserMutation = mutationWithClientMutationId({
         password: args.password,
         fullname: args.fullname
       })
-        .then(user => resolve({ user }))
+        .then(user => resolve({ message: "Success" }))
         .catch(reject);
     });
   }
