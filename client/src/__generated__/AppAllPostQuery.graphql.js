@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 736dc878cbba0415e57fe70645285be1
+ * @relayHash 465fb5bc9ed2378b0e67d715d87c89be
  */
 
 /* eslint-disable */
@@ -52,6 +52,10 @@ fragment Post_post on Post {
   id
   title
   content
+  author {
+    fullname
+    id
+  }
 }
 */
 
@@ -76,7 +80,7 @@ return {
   "operationKind": "query",
   "name": "AppAllPostQuery",
   "id": null,
-  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n}\n",
+  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n  author {\n    fullname\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -158,6 +162,25 @@ return {
                         "name": "content",
                         "args": null,
                         "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "author",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "fullname",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          v1
+                        ]
                       },
                       {
                         "kind": "ScalarField",

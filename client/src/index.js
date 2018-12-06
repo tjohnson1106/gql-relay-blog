@@ -6,7 +6,7 @@ import { BrowserRouter, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import CreatePost from "./components/CreatePost";
-import Login from "./components/login";
+import Login from "./components/Login";
 
 ReactDOM.render(
   <BrowserRouter>

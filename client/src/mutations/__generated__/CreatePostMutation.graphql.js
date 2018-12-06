@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9f0e0676104a681faf57a81b7ccc6eef
+ * @relayHash 206020234e9074cd0ce5aed85c71dcba
  */
 
 /* eslint-disable */
@@ -12,6 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type CreatePostInput = {
   title: string,
   content: string,
+  userId: string,
   clientMutationId?: ?string,
 };
 export type CreatePostMutationVariables = {|
@@ -23,6 +24,9 @@ export type CreatePostMutationResponse = {|
       +id: string,
       +title: ?string,
       +content: ?string,
+      +author: ?{|
+        +fullname: ?string
+      |},
     |}
   |}
 |};
@@ -42,6 +46,10 @@ mutation CreatePostMutation(
       id
       title
       content
+      author {
+        fullname
+        id
+      }
     }
   }
 }
@@ -58,62 +66,46 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "createPost",
-    "storageKey": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input",
-        "type": "CreatePostInput!"
-      }
-    ],
-    "concreteType": "CreatePostPayload",
-    "plural": false,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "post",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Post",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "title",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "content",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "kind": "Variable",
+    "name": "input",
+    "variableName": "input",
+    "type": "CreatePostInput!"
   }
-];
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "title",
+  "args": null,
+  "storageKey": null
+},
+v4 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "content",
+  "args": null,
+  "storageKey": null
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "fullname",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "CreatePostMutation",
   "id": null,
-  "text": "mutation CreatePostMutation(\n  $input: CreatePostInput!\n) {\n  createPost(input: $input) {\n    post {\n      id\n      title\n      content\n    }\n  }\n}\n",
+  "text": "mutation CreatePostMutation(\n  $input: CreatePostInput!\n) {\n  createPost(input: $input) {\n    post {\n      id\n      title\n      content\n      author {\n        fullname\n        id\n      }\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -121,16 +113,93 @@ return {
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "createPost",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "CreatePostPayload",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "post",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Post",
+            "plural": false,
+            "selections": [
+              v2,
+              v3,
+              v4,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "author",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "User",
+                "plural": false,
+                "selections": [
+                  v5
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   "operation": {
     "kind": "Operation",
     "name": "CreatePostMutation",
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "createPost",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "CreatePostPayload",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "post",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Post",
+            "plural": false,
+            "selections": [
+              v2,
+              v3,
+              v4,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "author",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "User",
+                "plural": false,
+                "selections": [
+                  v5,
+                  v2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '66daec72d21461eaac5017c30ee2f458';
+(node/*: any*/).hash = 'fbb700455360e65bfdd95ccadb40de00';
 module.exports = node;
