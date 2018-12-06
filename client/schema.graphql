@@ -122,7 +122,7 @@ type User implements Node {
 }
 
 type Viewer {
-  allPosts(after: String, first: Int, before: String, last: Int): PostConnection!
+  allPosts(after: String, first: Int, before: String, last: Int, order: String): PostConnection!
   User(id: ID, username: String): User
   id: ID!
 }

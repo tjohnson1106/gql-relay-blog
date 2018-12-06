@@ -13,7 +13,7 @@ ReactDOM.render(
     <Switch>
       <App path="/" exact={true} />
       <CreatePost path="/create-post" exact={true} />
-      <Login path="/logion" exact={true} />
+      <Login path="/login" exact={true} />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

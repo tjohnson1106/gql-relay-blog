@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 465fb5bc9ed2378b0e67d715d87c89be
+ * @relayHash a2ea895d21dc405ecf3119926960c146
  */
 
 /* eslint-disable */
@@ -32,7 +32,7 @@ query AppAllPostQuery {
 }
 
 fragment ListPage_viewer on Viewer {
-  allPosts(last: 100) {
+  allPosts(last: 100, order: "DESC") {
     edges {
       node {
         ...Post_post
@@ -66,6 +66,12 @@ var v0 = [
     "name": "last",
     "value": 100,
     "type": "Int"
+  },
+  {
+    "kind": "Literal",
+    "name": "order",
+    "value": "DESC",
+    "type": "String"
   }
 ],
 v1 = {
@@ -80,7 +86,7 @@ return {
   "operationKind": "query",
   "name": "AppAllPostQuery",
   "id": null,
-  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n  author {\n    fullname\n    id\n  }\n}\n",
+  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100, order: \"DESC\") {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  content\n  author {\n    fullname\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -125,7 +131,7 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "allPosts",
-            "storageKey": "allPosts(last:100)",
+            "storageKey": "allPosts(last:100,order:\"DESC\")",
             "args": v0,
             "concreteType": "PostConnection",
             "plural": false,
