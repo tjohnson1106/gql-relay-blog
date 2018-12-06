@@ -63,6 +63,10 @@ const styles = {
   }
 };
 
+// Storybook testing export
+
+export { Post };
+
 // Post_post Post is filename post is prop
 
 export default createFragmentContainer(
