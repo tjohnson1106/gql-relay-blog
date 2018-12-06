@@ -11,8 +11,6 @@ const { nodeInterface } = require("../interface/Node");
 const { User } = require("./User");
 const PostModel = require("../models/PostModel");
 
-// TODO: Implement author 113020181757
-
 const Post = new GraphQLObjectType({
   name: "Post",
   description: "Post type definition",
